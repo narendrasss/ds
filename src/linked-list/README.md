@@ -27,9 +27,6 @@ Get element:
 Push element to end of list:
   Array: 1.242ms
   Linked list: 0.050ms
-Push element to end of list:
-  Only head pointer: 0.412ms
-  With tail pointer: 0.050ms
 ```
 
 The linked list inserts an element in 0.05ms whereas the array does it in 1.242ms (248x slower!).
