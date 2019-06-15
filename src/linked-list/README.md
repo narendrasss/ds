@@ -31,6 +31,31 @@ Push element to end of list:
 
 The linked list inserts an element in 0.05ms whereas the array does it in 1.242ms (248x slower!).
 
+### Cons
+
+The main downside of linked lists over arrays is **slow random access time**, as seen from the first benchmark in the snippet above.
+
+- Array access is constant (in `O(1)`), which means it will always take the same amount of time regardless of the size of the array.
+- Linked list access is _linear_ (in `O(n)`), which means the time it takes to access an element grows with the size of the list.
+
+If we want to access the middle element, that is element `n / 2`:
+
+With 25,000 elements, we get the following times:
+
+```
+  Array: 0.248ms
+  Linked list: 0.281ms
+```
+
+With 50,000 elements, we get:
+
+```
+  Array: 0.242ms
+  Linked list: 0.344ms
+```
+
+The time for the array remained around the same, but the linked list took ~23% slower.
+
 ## Variants
 
 The most basic of linked lists is called a **singly linked list**. "Singly" means that each "node" in the list has a pointer to the next item, but does not know what item came before it.

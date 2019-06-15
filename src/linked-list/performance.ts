@@ -2,7 +2,9 @@ import SinglyLinkedList from './SinglyLinkedList'
 import DoublyLinkedList from './DoublyLinkedList'
 import { logPerformance } from '../utils'
 
-const values = Array.from({ length: 50000 }, () =>
+const SIZE = 50000
+
+const values = Array.from({ length: SIZE }, () =>
   Math.round(Math.random() * 100)
 )
 
@@ -11,7 +13,7 @@ const doubly = new DoublyLinkedList(...values)
 
 /* Array vs. list access time */
 
-const index = 36500
+const index = Math.floor(SIZE / 2)
 
 console.log('Get element:')
 logPerformance('Array', () => values[index])
