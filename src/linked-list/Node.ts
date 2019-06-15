@@ -1,10 +1,10 @@
 class Node<T> {
-  data: T
+  value: T
   next: Node<T> | null
   prev: Node<T> | null
 
-  constructor(data: T) {
-    this.data = data
+  constructor(value: T) {
+    this.value = value
     this.next = null
     this.prev = null
   }
