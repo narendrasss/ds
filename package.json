@@ -2,7 +2,7 @@
   "name": "ds",
   "version": "0.0.1",
   "description": "Typescript implementation of common data structures",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": "https://github.com/narendrasss/ds",
   "author": "Narendra Syahrasyad",
   "license": "MIT",
