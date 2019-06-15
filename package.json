@@ -1,0 +1,16 @@
+{
+  "name": "ds",
+  "version": "0.0.1",
+  "description": "Typescript implementation of common data structures",
+  "main": "index.js",
+  "repository": "https://github.com/narendrasss/ds",
+  "author": "Narendra Syahrasyad",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "tslint": "^5.17.0",
+    "tslint-config-airbnb": "^5.11.1",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.5.2"
+  }
+}
