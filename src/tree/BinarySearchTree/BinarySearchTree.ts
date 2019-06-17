@@ -3,12 +3,10 @@ import BSTNode, { ComparatorFn } from './BSTNode'
 export default class BinarySearchTree<T> {
   comparator: ComparatorFn<T>
   root: BSTNode<T>
-  size: number
 
   constructor(comparatorFn: ComparatorFn<T>, ...initialValues: T[]) {
     this.comparator = comparatorFn
     this.root = null
-    this.size = 0
 
     this.add(...initialValues)
   }
@@ -28,7 +26,6 @@ export default class BinarySearchTree<T> {
       } else {
         this.root.insert(el)
       }
-      this.size++
     })
     return this
   }
@@ -128,37 +125,30 @@ export default class BinarySearchTree<T> {
     if (node) {
       const { parent, left, right } = node
 
+      if (!left) {
+        if (parent) {
+          parent.left === node ? parent.setLeft(right) : parent.setRight(right)
+        } else {
+          // this is a root node
+          this.root = right
+        }
+      }
+
+      if (!right) {
+        if (parent) {
+          parent.left === node ? parent.setLeft(left) : parent.setRight(left)
+        } else {
+          // this is a root node
+          this.root = left
+        }
+      }
+
       if (left && right) {
         const { predecessor } = node
-        predecessor.setRight(node.right)
-
-        if (parent.left === node) {
-          parent.setLeft(predecessor)
-        } else {
-          parent.setRight(predecessor)
-        }
-
-        this.size--
-        return this
+        const tmp = predecessor.value
+        this.remove(predecessor.value)
+        node.value = tmp
       }
-
-      if (left) {
-        if (parent.left === node) {
-          parent.setLeft(left)
-        } else {
-          parent.setRight(left)
-        }
-      }
-
-      if (right) {
-        if (parent.left === node) {
-          parent.setLeft(right)
-        } else {
-          parent.setRight(right)
-        }
-      }
-
-      this.size--
     }
     return this
   }

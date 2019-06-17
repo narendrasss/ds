@@ -8,16 +8,36 @@ describe('bst', () => {
     const tree = new BinarySearchTree(comparator, ...values)
 
     console.log(tree.print())
-    expect(tree.size).toBe(values.length)
 
     const node = tree.find(10)
     expect(node.value).toEqual(10)
   })
 
-  test('balanced', () => {
-    const values = [1, 2, 3, 4, 5, 6]
-    const tree = new BinarySearchTree(comparator, ...values)
+  describe('remove', () => {
+    const values = [8, 3, 10, 1, 6, 14, 4, 7, 13]
+    let tree: BinarySearchTree<number>
 
-    console.log(tree.print())
+    beforeEach(() => {
+      tree = new BinarySearchTree(comparator, ...values)
+    })
+
+    it('removes node with one child', () => {
+      tree.remove(14)
+      expect(tree.find(14)).toBe(null)
+      expect(tree.find(10).right.value).toBe(13)
+    })
+
+    it('removes node with two children', () => {
+      tree.remove(6)
+      expect(tree.find(6)).toBe(null)
+      expect(tree.find(3).right.value).toBe(4)
+    })
+
+    it('removes root node', () => {
+      tree.remove(8)
+
+      expect(tree.find(8)).toBe(null)
+      expect(tree.root.value).toBe(7)
+    })
   })
 })
