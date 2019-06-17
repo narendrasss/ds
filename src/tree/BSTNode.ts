@@ -15,6 +15,34 @@ export default class BSTNode<T> {
     this.comparator = comparator
   }
 
+  get max(): BSTNode<T> {
+    if (!this.right) {
+      return this
+    }
+    return this.right.max
+  }
+
+  get min(): BSTNode<T> {
+    if (!this.left) {
+      return this
+    }
+    return this.left.min
+  }
+
+  get predecessor(): BSTNode<T> {
+    if (this.left) {
+      return this.left.max
+    }
+    return null
+  }
+
+  get successor(): BSTNode<T> {
+    if (this.right) {
+      return this.right.min
+    }
+    return null
+  }
+
   insert(value: T): BSTNode<T> {
     const comparison = this.comparator(this.value, value)
 

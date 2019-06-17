@@ -106,15 +106,23 @@ export default class BinarySearchTree<T> {
       const { parent, left, right } = node
 
       if (left && right) {
-        parent.setLeft(left)
-        parent.setRight(right)
+        const { predecessor } = node
+        predecessor.setRight(node.right)
+
+        if (parent.left === node) {
+          parent.setLeft(predecessor)
+        } else {
+          parent.setRight(predecessor)
+        }
+
+        this.size--
+        return this
       }
 
       if (left) {
         if (parent.left === node) {
           parent.setLeft(left)
-        }
-        if (parent.right === node) {
+        } else {
           parent.setRight(left)
         }
       }
@@ -122,8 +130,7 @@ export default class BinarySearchTree<T> {
       if (right) {
         if (parent.left === node) {
           parent.setLeft(right)
-        }
-        if (parent.right === node) {
+        } else {
           parent.setRight(right)
         }
       }
