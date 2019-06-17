@@ -10,7 +10,7 @@ export default class BinarySearchTree<T> {
     this.root = null
     this.size = 0
 
-    initialValues.forEach(value => this.add(value))
+    this.add(...initialValues)
   }
 
   get height() {
@@ -21,13 +21,16 @@ export default class BinarySearchTree<T> {
     return _getNodeHeight(this.root)
   }
 
-  add(el: T) {
-    this.size++
-    if (!this.root) {
-      this.root = new BSTNode(el, this.comparator)
-      return this
-    }
-    return this.root.insert(el)
+  add(...els: T[]) {
+    els.forEach(el => {
+      if (!this.root) {
+        this.root = new BSTNode(el, this.comparator)
+      } else {
+        this.root.insert(el)
+      }
+      this.size++
+    })
+    return this
   }
 
   contains(el: T) {

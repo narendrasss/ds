@@ -43,8 +43,8 @@ class DoublyLinkedList<T> {
 
   find(
     el: T,
-    onFound: (node: Node<T>, index: number) => any,
-    onNotFound: () => any
+    onFound: (node: Node<T>, index: number) => any = node => node,
+    onNotFound: () => any = () => null
   ) {
     let curr = this.head
     let index = 0

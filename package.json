@@ -20,6 +20,7 @@
   "scripts": {
     "build": "tsc",
     "test": "jest",
-    "perf:linked-list": "ts-node src/linked-list/performance.ts"
+    "perf:linked-list": "ts-node src/linked-list/performance.ts",
+    "perf:tree": "ts-node src/tree/bst.performance.ts"
   }
 }
