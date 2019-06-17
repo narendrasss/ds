@@ -55,6 +55,7 @@ logs:
 */
 
 tree.insert(2)
+tree.insert(16)
 console.log(tree.print())
 /*
 logs:
@@ -63,7 +64,20 @@ logs:
   3       10
 ┌─┴─┐     └─┐
 1   6       14
-└┐ ┌┴┐     ┌┘
- 2 4 7     13
+└┐ ┌┴┐     ┌┴┐
+ 2 4 7    13 16
+*/
+
+tree.remove(14)
+console.log(tree.print())
+/*
+logs:
+      8
+  ┌───┴───┐
+  3       10
+┌─┴─┐     └─┐
+1   6       13
+└┐ ┌┴┐      └┐
+ 2 4 7       16
 */
 ```
