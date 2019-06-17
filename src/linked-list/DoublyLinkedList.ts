@@ -105,10 +105,11 @@ class DoublyLinkedList<T> {
 
   shift() {
     if (this.head) {
-      const removee = this.head
-      this.head = this.head.next
-      this.length--
-      return removee.value
+      const tmp = this.head
+      const next = this.head.next
+      next.prev = null
+      this.head = next
+      return tmp.value
     }
     return null
   }
@@ -116,7 +117,12 @@ class DoublyLinkedList<T> {
   unshift(el: T) {
     const newNode = new Node(el)
     newNode.next = this.head
+    if (this.head) this.head.prev = newNode
     this.head = newNode
+    this.length++
+    if (this.length === 1) {
+      this.tail = newNode
+    }
     return this
   }
 
