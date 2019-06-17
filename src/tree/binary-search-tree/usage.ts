@@ -27,3 +27,7 @@ console.log(imbalancedTree.print(), '\n')
 imbalancedTree.remove(1)
 console.log('Remove root:')
 console.log(imbalancedTree.print(), '\n')
+
+const balancedTree = new BinarySearchTree(comparator, ...[3, 1, 5, 2, 4, 6])
+console.log('Balanced tree:')
+console.log(balancedTree.print())

@@ -12,11 +12,24 @@ export default class BinarySearchTree<T> {
   }
 
   get height() {
-    const _getNodeHeight = (node: BSTNode<T>): number => {
-      if (!node) return 0
-      return Math.max(_getNodeHeight(node.left), _getNodeHeight(node.right)) + 1
+    return this.root.height
+  }
+
+  // deep comparison of two binary trees
+  static equals<T>(original: BinarySearchTree<T>, other: BinarySearchTree<T>) {
+    const deepCompareNodes = (
+      first: BSTNode<T>,
+      second: BSTNode<T>
+    ): boolean => {
+      if (!first && !second) return true
+      if (!first || !second) return false
+      return (
+        first.value === second.value &&
+        deepCompareNodes(first.left, second.left) &&
+        deepCompareNodes(first.right, second.right)
+      )
     }
-    return _getNodeHeight(this.root)
+    return deepCompareNodes(original.root, other.root)
   }
 
   add(...els: T[]) {
@@ -45,7 +58,7 @@ export default class BinarySearchTree<T> {
   }
 
   print() {
-    const height = this.height
+    const height = this.height + 1
     const width = 2 ** height - 1
     const result = Array(2 * height - 1)
       .fill(' ')

@@ -1,4 +1,4 @@
-import BinarySearchTree from './BinarySearchTree'
+import BinarySearchTree from '../BinarySearchTree'
 
 describe('bst', () => {
   const comparator = jest.fn((a: number, b: number) => b - a)
@@ -11,6 +11,14 @@ describe('bst', () => {
 
     const node = tree.find(10)
     expect(node.value).toEqual(10)
+  })
+
+  describe('equals', () => {
+    it('returns true for equal trees', () => {
+      const first = new BinarySearchTree(comparator, ...[8, 4, 10])
+      const second = new BinarySearchTree(comparator, ...[8, 4, 10])
+      expect(BinarySearchTree.equals(first, second)).toBe(true)
+    })
   })
 
   describe('remove', () => {
