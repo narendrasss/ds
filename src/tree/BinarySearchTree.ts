@@ -81,6 +81,14 @@ export default class BinarySearchTree<T> {
             result[level + 1][rightChildIndex] = '┐'
             drawLine(result[level + 1], mid + 1, rightChildIndex)
           }
+
+          if (node.left && !node.right) {
+            result[level + 1][mid] = '┘'
+          }
+
+          if (node.right && !node.left) {
+            result[level + 1][mid] = '└'
+          }
         }
 
         update(node.left, level + 2, left, mid - 1)
@@ -96,8 +104,30 @@ export default class BinarySearchTree<T> {
     const node = this.find(el)
     if (node) {
       const { parent, left, right } = node
-      parent.setLeft(left)
-      parent.setRight(right)
+
+      if (left && right) {
+        parent.setLeft(left)
+        parent.setRight(right)
+      }
+
+      if (left) {
+        if (parent.left === node) {
+          parent.setLeft(left)
+        }
+        if (parent.right === node) {
+          parent.setRight(left)
+        }
+      }
+
+      if (right) {
+        if (parent.left === node) {
+          parent.setLeft(right)
+        }
+        if (parent.right === node) {
+          parent.setRight(right)
+        }
+      }
+
       this.size--
     }
     return this
