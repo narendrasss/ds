@@ -84,6 +84,10 @@ export default class BSTNode<T> {
     return null
   }
 
+  hasChildren() {
+    return Boolean(this.left || this.right)
+  }
+
   setLeft(node: BSTNode<T>) {
     if (this.left) {
       this.left.parent = null

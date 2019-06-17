@@ -47,9 +47,15 @@ export default class BinarySearchTree<T> {
   print() {
     const height = this.height
     const width = 2 ** height - 1
-    const result = Array(height)
-      .fill(null)
+    const result = Array(2 * height - 1)
+      .fill(' ')
       .map(val => Array(width).fill(val))
+
+    const drawLine = (arr: string[], start: number, end: number) => {
+      for (let i = start; i < end; i++) {
+        arr[i] = '─'
+      }
+    }
 
     const update = (
       node: BSTNode<T>,
@@ -60,13 +66,30 @@ export default class BinarySearchTree<T> {
       if (node) {
         const mid = (left + right) / 2
         result[level][mid] = node.value
-        update(node.left, level + 1, left, mid - 1)
-        update(node.right, level + 1, mid + 1, right)
+
+        if (node.hasChildren()) {
+          result[level + 1][mid] = '┴'
+
+          if (node.left) {
+            const leftChildIndex = (left + (mid - 1)) / 2
+            result[level + 1][leftChildIndex] = '┌'
+            drawLine(result[level + 1], leftChildIndex + 1, mid)
+          }
+
+          if (node.right) {
+            const rightChildIndex = (mid + 1 + right) / 2
+            result[level + 1][rightChildIndex] = '┐'
+            drawLine(result[level + 1], mid + 1, rightChildIndex)
+          }
+        }
+
+        update(node.left, level + 2, left, mid - 1)
+        update(node.right, level + 2, mid + 1, right)
       }
     }
 
     update(this.root, 0, 0, width - 1)
-    return this._makeLines(result)
+    return result.map(line => line.join('')).join('\n')
   }
 
   remove(el: T) {
@@ -78,34 +101,5 @@ export default class BinarySearchTree<T> {
       this.size--
     }
     return this
-  }
-
-  private _makeLines(arr: BSTNode<T>[][]) {
-    const result = []
-    for (let i = 0; i < arr.length - 1; i++) {
-      const parent = arr[i]
-      const child = arr[i + 1]
-      const line = Array(parent.length).fill('')
-
-      const getIndexReducer = (
-        acc: number[],
-        node: BSTNode<T>,
-        idx: number
-      ) => {
-        if (node) {
-          acc.push(idx)
-        }
-        return acc
-      }
-
-      const parentIndexes = parent.reduce(getIndexReducer, [])
-      parentIndexes.forEach(idx => (line[idx] = '┴'))
-
-      const childIndexes = child.reduce(getIndexReducer, [])
-      childIndexes.forEach(idx => (line[idx] = '|'))
-
-      result.push(parent, line)
-    }
-    return result
   }
 }
