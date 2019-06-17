@@ -132,9 +132,7 @@ export default class BinarySearchTree<T> {
           // this is a root node
           this.root = right
         }
-      }
-
-      if (!right) {
+      } else if (!right) {
         if (parent) {
           parent.left === node ? parent.setLeft(left) : parent.setRight(left)
         } else {

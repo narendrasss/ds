@@ -12,8 +12,12 @@ tree.add(2)
 console.log('Add 2:')
 console.log(tree.print(), '\n')
 
-tree.remove(6)
-console.log('Remove 6:')
+tree.add(16)
+console.log('Add 16:')
+console.log(tree.print(), '\n')
+
+tree.remove(14)
+console.log('Remove 14:')
 console.log(tree.print(), '\n')
 
 const imbalancedTree = new BinarySearchTree(comparator, ...[1, 2, 3, 4, 5, 6])
