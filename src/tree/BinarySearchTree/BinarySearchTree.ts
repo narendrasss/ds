@@ -100,7 +100,27 @@ export default class BinarySearchTree<T> {
     }
 
     update(this.root, 0, 0, width - 1)
-    return result.map(line => line.join('')).join('\n')
+
+    const trim = (result: string[][]) => {
+      const leftMost = Math.min(
+        ...result.map(arr => arr.findIndex(str => str !== ' '))
+      )
+      const rightMost = Math.max(
+        ...result.map(arr => {
+          const length = arr.length
+          const idx = arr
+            .slice()
+            .reverse()
+            .findIndex(str => str !== ' ')
+          return length - 1 - idx
+        })
+      )
+      return result.map(arr => arr.slice(leftMost, rightMost + 1))
+    }
+
+    return trim(result)
+      .map(line => line.join(''))
+      .join('\n')
   }
 
   remove(el: T) {
