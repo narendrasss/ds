@@ -93,7 +93,7 @@ export default class MinHeap<T> {
   }
 
   // in min heap, parent should always be smaller or equal to index
-  private isInCorrectOrder(value: T, parent: T) {
+  isInCorrectOrder(value: T, parent: T) {
     if (parent) {
       const comparison = this.compare(value, parent)
       return comparison <= 0
