@@ -9,6 +9,7 @@
   "private": false,
   "devDependencies": {
     "@types/jest": "^24.0.14",
+    "@types/lodash": "^4.14.134",
     "jest": "^24.8.0",
     "ts-jest": "^24.0.2",
     "ts-node": "^8.3.0",
@@ -21,5 +22,8 @@
     "build": "tsc",
     "test": "jest",
     "perf:linked-list": "ts-node src/linked-list/performance.ts"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11"
   }
 }

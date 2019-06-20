@@ -1,3 +1,4 @@
+import { isEqual } from 'lodash'
 import Node from './Node'
 
 /**
@@ -41,19 +42,16 @@ class DoublyLinkedList<T> {
     this.length = 0
   }
 
-  find(
-    el: T,
-    onFound: (node: Node<T>, index: number) => any = node => node,
-    onNotFound: () => any = () => null
-  ) {
+  find<K>(callback: (currentValue: T, index: number) => K) {
     let curr = this.head
     let index = 0
     while (curr) {
-      if (curr.value === el) return onFound(curr, index)
+      const result = callback(curr.value, index)
+      if (result !== null) return result
       curr = curr.next
       index++
     }
-    return onNotFound()
+    return null
   }
 
   get(pos: number) {
@@ -64,11 +62,16 @@ class DoublyLinkedList<T> {
   }
 
   includes(el: T) {
-    return this.find(el, () => true, () => false)
+    const result = this.find(currentValue =>
+      isEqual(currentValue, el) ? true : null
+    )
+    return result || false
   }
 
   indexOf(el: T) {
-    return this.find(el, (_, idx) => idx, () => -1)
+    return this.find((currentValue, index) =>
+      isEqual(currentValue, el) ? index : null
+    )
   }
 
   pop() {
