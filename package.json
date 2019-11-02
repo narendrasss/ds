@@ -24,6 +24,6 @@
     "perf:linked-list": "ts-node src/linked-list/performance.ts"
   },
   "dependencies": {
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.13"
   }
 }
